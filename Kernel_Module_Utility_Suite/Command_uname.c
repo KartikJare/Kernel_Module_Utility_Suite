@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+#include<sys/utsname.h>
+
+//  ./unamex
+//  argv[0] 
+
+//  argc = 1
+
+/*
+    Call the system call uname
+    print information from utsname structure
+*/
+
+int main(int argc, char *argv[])
+{ 
+    struct utsname obj;
+    int iRet = 0;
+
+    iRet = uname(&obj);    // send empty struct
+
+    if(iRet == -1)
+    {
+        printf("Error : Unable to fetch system information\n");
+
+        return -1;
+    }
+
+    printf("Operating system name : %s\n",obj.sysname);
+    printf("Node name : %s\n",obj.nodename);
+    printf("Operating System version : %s\n",obj.release);
+
+    return 0;
+}
